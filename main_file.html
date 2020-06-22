@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src = 'd3.js'></script>
+    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
+
+    <meta property='og:title' content='Student Segments/Profiles'/>
+
+
+
+    <title>Student Segments/Profiles</title>
+</head>
+
+
+<body>
+    <!-- <div id="info">
+        a
+    </div> -->
+    
+    <div id="tooltip"></div>
+    <div id="graphic">
+        <div id="sections">
+            <section class="step">
+                <div class="title"></div>
+                <h1>What are the different types(segments) of students studying with OpenUni ?</h1>
+                <p>By <a href = 'https://linkedin.com/in/sanjana-tule-a0661319/'>Sanjana Tule</a></p>
+                <p>
+                    
+                    Most businesses today spend millions doing customer segmentation to allow for the effective allocation of marketing resources and the maximisation of cross and up-selling opportunities. Universities are also looking at segmenting of student population to assist in dividing the large, diverse student base into more manageable groups. Here we attempt to segment Open Uni Student Population. We have grouped the students by similar characteristics into bubbles so that the segments can be visualised for entire Student Population of approx. 25k students. Let's take a more detailed journey through this data. Scroll down when you are ready! <br>
+
+                    Data was provided by Open University Learning Analytics and originally sourced from <a href = 'https://analyse.kmi.open.ac.uk/open_dataset'>Learning Analytics Dataset Website</a>
+                </p>
+                
+            </section>
+            <section class="step">
+                <p>
+                Students are segmented using the unsupervised machine learning algorithm <a href = 'https://towardsdatascience.com/clustering-on-mixed-type-data-8bbd0a2569c3'> Gower Distance</a> Here, we have segmented the students based on the both categorical and numerical data - demographics, academic performance and subject engagement.
+                <br>If you ever want to find out more about a bubble, just hover over it and a tooltip should appear.<br><br> The size 
+                of the bubbles represent the total students in the bubble, which are clustered together to form a segment. 
+
+                When shown like this, it's quite clear that machine learning has almost done a almost similar distribution of students in each clusters after choosing the right numbers of clusters to divide the population in. <br><br>
+                The clusters are currently named 1,2,3 as it is done by unsupervised machine learning algorithm. <br>
+                </p>
+                <svg id = 'legend' width = '400px' height = '500px'></svg>
+            </section>
+            <section class = 'step'>
+                <br><svg id = 'legend2' width = '400px' height = '450px'></svg><br>
+                Here we visualise these segments in lower dimension space , so human eye can ascertain if the segments are different from each other.
+                Although not perfect (especially cluster 2 in blue), colors are mostly located in similar areas, confirming the relevancy of the segmentation. If you hover over a bubble, you can see additional information,
+                including the number of students, demographics,academic performance in that bubble.Lets try to see if we can understand the characteristics of these segments and name them !
+                
+            </section>
+            <section class='step'>  
+                
+                <h2> What Student Characteristics possibly influence the Segmentation?</h2>
+                <p>
+                    Although it is very hard to understand the clusters created by unsupervised machine learning algortihm,we can try using characteristics to understand these clusters.We have provided the gower distance algorithm the student's demographics - age band,gender,highest level of education, academic performance and subject engagement (vle clicks). We can use each of these elements to see if we can understand the student segments. 
+                    Lets start with Demographics data ,specifically Gender!
+                    <br><br> For this part of visualisation,we treat change all the bubble size to the same size so we can easily group them into tree branches.  
+                </p>
+                
+               
+            </section>
+            <section class="step">  
+                
+                <h2>Did Gender influence the Segmentation?</h2>
+                <p>
+                    If we rearrange the student population by gender ,it becomes clear that gender played a major role in clustering the data. 
+                <br> After seperating by gender, the cluster purity of cluster 1 (left of the tree) is 76% vs the right hand of the tree is not so good at 60%. Remember for purity, we consider the total student volume in that branch. <br>
+                Lets see if we can find any other characteristics to further seperate the segments in the right of the tree, either by academic performance or engagement score. 
+                
+                </p>
+                <svg id = 'legend4' width = '400px' height = '200px'></svg>
+            </section>
+    
+            <section class="step">  
+                
+                <h2>Academic Performance or Engagement Score?</h2>
+                <p>
+                    When we plot the Engagement Score (x axis) vs Academic Score (y axis) ,we see the cluster 2 (blue) vary quite distinctly from  cluster 3 (pink) across the y axis i.e Academic Score.
+                <br>There are few cluster 3 bubbles (pink) mixed with cluster 2 bubbles (blue) but the big bubbles of cluster 3 (pink) is mostly clustered around an high academic score. A score of 60 on y axis seems be a good choice in seperating these 2 segments.<br>
+                So we decide to use the Academic Score to further seperate cluster 2 and 3, lets see the results! 
+                </p>
+                <svg id = 'legend5' width = '400px' height = '200px'></svg>
+            </section>    
+    
+            <section class="step">
+                
+                 <h2>How much can Academic Performance explain the Student Segmentation?</h2>
+                <p>
+                When we further branch the right of the tree by academic performance , the cluster purity of the leaves improves from 60% to create a more pure student clusters. 
+                It creates a segment with "Less than 60%" score with 85% purity and the other branch improves considerably to 93% purity for males with "Greater than 60%" score. 
+                <br>
+                There can be many other attributes to explain the segments created by machine , but we follow the 80-20 rule, where 80% of clustering logic can be explained using 20% of the student characteristics, it ensures the machine has done a decent job of clustering students without any supervision.
+                <br><br>(Hover over the labels if you've forgotten the segment)<br><br>
+
+                What is striking about this graphic is that we can try to understand how unsupervised machine leanring algorithm has almost taken a human approach of segmenting the students. Less now summarise these segments and give them a human readable names. 
+                </p>
+                
+            </section>
+        
+            <section class="step">
+                <h2>Midfliers (Segment 1)</h2>
+                Lets see the major charactersitics of segment 1. It has 38% of the total student population, a majority of the students are in this segment.it has 67% pass rate compared to the avg. of 55% and above average subject engagement of 69% vs avg. 63%.
+                <br><br> It has also has a very high female population (95%) compared to average (47%) in the dataset.Overall we call this segment "The Midfliers".<br><br> 
+            </section>
+    
+            <section class="step">
+                <h2>Strugglers (Segment 2)</h2>
+                Now we look at the major charactersitics of segment 2. It has lowest student population at 27% ,a less than average (47%) female population and a very low pass rate of 15% than average 55%.
+                <br><br> It has also a very low overall engagement score but suffers from clicks/students at 702 vs average of 1374 in the general population.Overall we call this segment "The Strugglers".<br><br> 
+            </section>
+    
+            <section class="step">
+                <h2>HighFliers (Segment 3)</h2>
+                Now we look at the last segment - segment 3. It has the student population at 35% ,almost all male and a very high pass rate - 75%, which is above the average.
+                <br><br> It has also very high overall engagement score - 81% and clicks/students are way higher than average (2355 vs 1374).Overall we call this segment "The Highfliers".<br><br>             
+            </section>
+    
+            <section class="step">
+                <h1>The End</h1>
+                <p>
+                    Hopefully, this has helped you understand the different student segments at OpenUni and how unsupervised machine learning can help us do segmentation by finding similarity or dissimilarity in the student base.If you want to take a deeper look into the what segmentation is and why we need it you can do so <a href = 'https://blog.fullfabric.com/the-benefits-of-segmentation-in-higher-education'>here.</a>.
+                    To know more about beautiful unsupervised machine learning examples, you can do so <a href = https://towardsdatascience.com/unsupervised-learning-project-creating-customer-segments-17c4b4bbf925>here.</a>
+                    <br><br>
+                    Special thanks to Curbert Chow for his article on <a href = 'https://towardsdatascience.com/@cuthbertchow'>How I created an Interactive,Scrolling Visualisation with D3.js and how you can too</a>. 
+                    <br>
+                    Also a huge thanks to the Monash data visualisation teaching team for inspiring and guiding towards making good data visualisations.
+                    <br><br><br>
+                </p>
+                <span></span><span></span><span></span>                
+            </section>
+
+        </div>
+        <div id="vis">
+
+        </div>
+    </div>
+
+    <script src = 'scroller.js'></script>
+    <script src = 'sections.js'></script>
+
+</body>
+</html>
